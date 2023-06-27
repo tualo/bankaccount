@@ -7,10 +7,17 @@ CREATE TABLE IF NOT EXISTS `bankkonten` (
   `blz` varchar(15) DEFAULT NULL,
   `waehrung` varchar(5) DEFAULT '',
   `last_fints_query` datetime DEFAULT NULL,
-  `kostenstelle` int(11) DEFAULT 0,
   PRIMARY KEY (`konto`)
 ) //
 
+
+call addFieldIfNotExists("bankkonten","name","varchar(100) DEFAULT ''") //
+call addFieldIfNotExists("bankkonten","kontonummer","varchar(10) DEFAULT ''") //
+call addFieldIfNotExists("bankkonten","bic","varchar(15) DEFAULT NULL") //
+call addFieldIfNotExists("bankkonten","blz","varchar(15) DEFAULT NULL") //
+call addFieldIfNotExists("bankkonten","waehrung","varchar(5) DEFAULT 'EUR'") //
+call addFieldIfNotExists("bankkonten","last_fints_query","datetime DEFAULT NULL") //
+call addFieldIfNotExists("bankkonten","last_fints_query","datetime DEFAULT NULL") //
 
 CREATE TABLE IF NOT EXISTS `kontoauszuege` (
   `ID` int(11) NOT NULL,
