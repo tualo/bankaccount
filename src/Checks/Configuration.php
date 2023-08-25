@@ -7,6 +7,7 @@ use Tualo\Office\Basic\PostCheck;
 use Tualo\Office\Basic\TualoApplication as App;
 
 
+
 class Configuration  extends PostCheck {
     public static function test(array $config){
         $tables = [
