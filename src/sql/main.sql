@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `bankkonten` (
   PRIMARY KEY (`konto`)
 ) //
 
+alter table bankkonten rename column `KONTO` to `konto` //
 
 call addFieldIfNotExists("bankkonten","name","varchar(100) DEFAULT ''") //
 call addFieldIfNotExists("bankkonten","kontonummer","varchar(10) DEFAULT ''") //
@@ -17,42 +18,42 @@ call addFieldIfNotExists("bankkonten","bic","varchar(15) DEFAULT NULL") //
 call addFieldIfNotExists("bankkonten","blz","varchar(15) DEFAULT NULL") //
 call addFieldIfNotExists("bankkonten","waehrung","varchar(5) DEFAULT 'EUR'") //
 call addFieldIfNotExists("bankkonten","last_fints_query","datetime DEFAULT NULL") //
-call addFieldIfNotExists("bankkonten","last_fints_query","datetime DEFAULT NULL") //
 
-CREATE TABLE IF NOT EXISTS `kontoauszuege` (
-  `ID` int(11) NOT NULL,
-  `bankkonto` varchar(255) NOT NULL,
-  `BUCHUNGSDATUM` date DEFAULT NULL,
-  `VALUTA` date DEFAULT NULL,
-  `betrag` decimal(15,2) DEFAULT NULL,
-  `WAEHRUNG` varchar(10) DEFAULT NULL,
-  `EMPFAENGERNAME1` varchar(255) DEFAULT NULL,
-  `EMPFAENGERNAME2` varchar(255) DEFAULT NULL,
-  `PRIMANOTA` int(11) DEFAULT NULL,
-  `blz` varchar(15) DEFAULT NULL,
-  `kontonummer` varchar(30) DEFAULT NULL,
-  `VERWENDUNGSZWECK1` varchar(255) DEFAULT NULL,
-  `VERWENDUNGSZWECK2` varchar(255) DEFAULT NULL,
-  `VERWENDUNGSZWECK3` varchar(255) DEFAULT NULL,
-  `VERWENDUNGSZWECK4` varchar(255) DEFAULT NULL,
-  `VERWENDUNGSZWECK5` varchar(255) DEFAULT NULL,
-  `RECHNUNGSNUMMER` varchar(400) DEFAULT NULL,
-  `ZAHLUNGSID` int(11) DEFAULT NULL,
-  `uniqueid` varchar(255) NOT NULL,
-  `kontostand` decimal(15,2) DEFAULT 0.00,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `uidx_kontoauszuege_uniqueid_n` (`uniqueid`),
-  KEY `idx_ka_bd` (`BUCHUNGSDATUM`),
-  KEY `idx_ka_va` (`VALUTA`),
-  KEY `idx_ka_e1` (`EMPFAENGERNAME1`),
-  KEY `idx_ka_e2` (`EMPFAENGERNAME2`),
-  KEY `idx_ka_blz` (`blz`),
-  KEY `idx_ka_kno` (`kontonummer`),
-  KEY `idx_ka_v1` (`VERWENDUNGSZWECK1`),
-  KEY `idx_ka_v2` (`VERWENDUNGSZWECK2`),
-  KEY `idx_ka_v3` (`VERWENDUNGSZWECK3`),
-  KEY `idx_ka_v4` (`VERWENDUNGSZWECK4`),
-  KEY `idx_ka_zi` (`ZAHLUNGSID`)
+
+create table if not exists `kontoauszuege` (
+  `id` int(11) not null,
+  `bankkonto` varchar(255) not null,
+  `buchungsdatum` date default null,
+  `valuta` date default null,
+  `betrag` decimal(15,2) default null,
+  `waehrung` varchar(10) default null,
+  `empfaengername1` varchar(255) default null,
+  `empfaengername2` varchar(255) default null,
+  `primanota` int(11) default null,
+  `blz` varchar(15) default null,
+  `kontonummer` varchar(30) default null,
+  `verwendungszweck1` varchar(255) default null,
+  `verwendungszweck2` varchar(255) default null,
+  `verwendungszweck3` varchar(255) default null,
+  `verwendungszweck4` varchar(255) default null,
+  `verwendungszweck5` varchar(255) default null,
+  `rechnungsnummer` varchar(400) default null,
+  `zahlungsid` int(11) default null,
+  `uniqueid` varchar(255) not null,
+  `kontostand` decimal(15,2) default 0.00,
+  primary key (`id`),
+  unique key `uidx_kontoauszuege_uniqueid_n` (`uniqueid`),
+  key `idx_ka_bd` (`buchungsdatum`),
+  key `idx_ka_va` (`valuta`),
+  key `idx_ka_e1` (`empfaengername1`),
+  key `idx_ka_e2` (`empfaengername2`),
+  key `idx_ka_blz` (`blz`),
+  key `idx_ka_kno` (`kontonummer`),
+  key `idx_ka_v1` (`verwendungszweck1`),
+  key `idx_ka_v2` (`verwendungszweck2`),
+  key `idx_ka_v3` (`verwendungszweck3`),
+  key `idx_ka_v4` (`verwendungszweck4`),
+  key `idx_ka_zi` (`zahlungsid`)
 ) //
 
 call addForeignKeyIfNotExists (
