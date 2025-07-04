@@ -13,8 +13,8 @@ class JsLoader implements IRoute
     {
         BasicRoute::add('/jsbankaccount/(?P<file>[\w.\/\-]+).js', function ($matches) {
             RouteSecurityHelper::serveSecureStaticFile(
-                $matches['file'],
-                dirname(__DIR__, 1) . '/js',
+                $matches['file'] . '.js',
+                dirname(__DIR__, 1) . '/js/lazy/',
                 ['js'],
                 ['application/javascript']
             );
